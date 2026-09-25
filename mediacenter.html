@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StonedCookieGaming</title>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <link rel="stylesheet" href="./styles/styles.css">
+    <script src="./handling/loginregisterform.js"></script>
+    <script src="./configs/keys.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@400..800&display=swap" rel="stylesheet">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VKC7B3DDWD"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-VKC7B3DDWD');
+    </script>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <header>
+        <div class="logo-container">
+            <img src="./img/logo.png" alt="Logo" class="logo"> <!-- Adjust the src attribute to your image path -->
+        </div>
+        <div class="text-container">
+            StonedCookieGaming
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="mediacenter.html">Media Center</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="user-info" id="user-info">
+            <div class="welcome-message"></div>
+            <a href="./handling/popup.html" id="login-register-link" onclick="showPopup()">Login/Register</a>
+        </div>
+    </header>
+
+    <main>
+        <div class="main-content">
+            <!-- Individual Video Embed -->
+            <h2 style="text-align: center">Latest YouTube Video</h2>
+            <div class="latest-video">
+                <iframe src="https://www.youtube.com/embed/Cf-u9_3Rjm8?si=GZG7VsD7zqv4CPSq" frameborder="0" allowfullscreen></iframe>
+            </div>
+
+            <!-- Playlist Embed -->
+            <h2 style="text-align: center">Featured Playlists</h2>
+            <div class="featured-playlists-container">
+                <div class="featured-playlist">
+                    <h4>Cop Watching</h4>
+                    <iframe src="https://www.youtube.com/embed/videoseries?si=m1E03KK09_xAqdxo&amp;list=PLPXZMIvVbaTbSJFC34Ib-BBTBPZV7D2c6" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div class="featured-playlist">
+                    <h4>Collabs</h4>
+                    <iframe src="https://www.youtube.com/embed/videoseries?si=FzPaaSsxwfwb2jT1&amp;controls=0&amp;list=PLPXZMIvVbaTaybxKDggZE_zlThEm1ncaH" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div class="featured-playlist">
+                    <h4>Shorts</h4>
+                    <iframe src="https://www.youtube.com/embed/videoseries?si=M283CwTJJ-aJEH_h&amp;list=PLPXZMIvVbaTZKdGXAL5fyH0YJSy_u1ThO" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Popup for Sign-in/Register -->
+    <div id="popup-container"></div>
+
+    <script type="module">
+        import config from './configs/keys.js';
+
+        document.addEventListener("DOMContentLoaded", async function () {
+            // Load the popup form dynamically
+            const popupContainer = document.getElementById('popup-container');
+            const response = await fetch('./handling/popup.html');
+            const popupHTML = await response.text();
+            popupContainer.innerHTML = popupHTML;
+
+            // Render the reCAPTCHA in the sign-in form
+            const recaptchaContainer = document.getElementById('recaptcha-container');
+            if (recaptchaContainer) {
+                recaptchaContainer.innerHTML = `<div class="g-recaptcha" data-sitekey="${config.recaptchaSiteKey}"></div>`;
+            }
+
+            // Render the reCAPTCHA in the register form
+            const recaptchaContainerRegister = document.getElementById('recaptcha-container-register');
+            if (recaptchaContainerRegister) {
+                recaptchaContainerRegister.innerHTML = `<div class="g-recaptcha" data-sitekey="${config.recaptchaSiteKey}"></div>`;
+            }
+        });
+
+        function showPopup() {
+            document.getElementById("popup").style.display = "block";
+        }
+
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
+        }
+
+        function showForm(formId) {
+            document.getElementById("signin-form").style.display = "none";
+            document.getElementById("register-form").style.display = "none";
+            document.getElementById(formId).style.display = "block";
+        }
+
+        function signIn() {
+            // Handle sign-in logic here
+        }
+
+        function registerUser() {
+            // Handle user registration logic here
+        }
+    </script>
+</body>
+</html>

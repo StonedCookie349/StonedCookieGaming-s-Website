@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StonedCookieGaming</title>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <link rel="stylesheet" href="./styles/styles.css">
+    <script src="./handling/loginregisterform.js"></script>
+    <script src="./configs/keys.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@400..800&display=swap" rel="stylesheet">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VKC7B3DDWD"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-VKC7B3DDWD');
+    </script>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <header>
+        <div class="logo-container">
+            <img src="./img/logo.png" alt="Logo" class="logo"> <!-- Adjust the src attribute to your image path -->
+        </div>
+        <div class="text-container">
+            StonedCookieGaming
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="mediacenter.html">Media Center</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="user-info" id="user-info">
+            <div class="welcome-message"></div>
+            <a href="#" id="login-register-link" onclick="showPopup()">Login/Register</a>
+        </div>
+    </header>
+
+    <main>
+        <h1>Public GitHub Repositories</h1>
+        <h4>My open source repositories. Feel free to download and modify how you see fit. Remember to share your improvements with me so I can improve as well!</h4>
+        <div id="repositories"></div>
+
+        <script>
+            // Replace 'YOUR_GITHUB_USERNAME' with your GitHub username
+            const username = 'StonedCookieGaming';
+
+            // GitHub API endpoint for repositories
+            const apiUrl = `https://api.github.com/users/${username}/repos`;
+
+            // Fetch repositories using GitHub API
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(repositories => {
+                    // Display repositories
+                    const repositoriesContainer = document.getElementById('repositories');
+                    repositories.forEach(repo => {
+                        const repoElement = document.createElement('div');
+                        repoElement.innerHTML = `
+                            <h2>${repo.name}</h2>
+                            <p>${repo.description || 'No description available.'}</p>
+                            <p>Language: ${repo.language || 'Not specified'}</p>
+                            <a href="${repo.html_url}" target="_blank">View on GitHub</a>
+                            <a href="${repo.clone_url}" download="${repo.name}.zip">Download</a>
+                        `;
+                        repositoriesContainer.appendChild(repoElement);
+                    });
+                })
+                .catch(error => console.error('Error fetching repositories:', error));
+        </script>
+
+        <!--Discord Widgets-->
+        <h1>Current Game Projects</h1>
+        <div class="discord-iframe-container">
+            <div class="discord-iframe-wrapper">
+                <h4>Stoner's Paradise Roleplay</h4>
+                <iframe src="https://discord.com/widget?id=1171110782788972595&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+            </div>
+            <div class="iframe-wrapper">
+                <h4>Empire of Stoners</h4>
+                <iframe src="https://discord.com/widget?id=995247311460515880&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+            </div>
+        </div>
+    </main>
+
+    <!-- Popup for Sign-in/Register -->
+    <div id="popup-container"></div>
+
+    <script type="module">
+        import config from './configs/keys.js';
+
+        document.addEventListener("DOMContentLoaded", async function () {
+            // Load the popup form dynamically
+            const popupContainer = document.getElementById('popup-container');
+            const response = await fetch('./handling/popup.html');
+            const popupHTML = await response.text();
+            popupContainer.innerHTML = popupHTML;
+
+            // Render the reCAPTCHA in the sign-in form
+            const recaptchaContainer = document.getElementById('recaptcha-container');
+            if (recaptchaContainer) {
+                recaptchaContainer.innerHTML = `<div class="g-recaptcha" data-sitekey="${config.recaptchaSiteKey}"></div>`;
+            }
+
+            // Render the reCAPTCHA in the register form
+            const recaptchaContainerRegister = document.getElementById('recaptcha-container-register');
+            if (recaptchaContainerRegister) {
+                recaptchaContainerRegister.innerHTML = `<div class="g-recaptcha" data-sitekey="${config.recaptchaSiteKey}"></div>`;
+            }
+        });
+
+        function showPopup() {
+            document.getElementById("popup").style.display = "block";
+        }
+
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
+        }
+
+        function showForm(formId) {
+            document.getElementById("signin-form").style.display = "none";
+            document.getElementById("register-form").style.display = "none";
+            document.getElementById(formId).style.display = "block";
+        }
+
+        function signIn() {
+            // Handle sign-in logic here
+        }
+
+        function registerUser() {
+            // Handle user registration logic here
+        }
+    </script>
+</body>
+</html>

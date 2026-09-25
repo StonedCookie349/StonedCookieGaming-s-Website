@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and Register</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Popup Container -->
+    <div id="popup-container" class="popup-container">
+        <div id="popup" class="popup">
+            <div class="popup-content">
+                <span class="close" onclick="closePopup()">&times;</span>
+
+                <!-- Sign-in Form -->
+                <div id="signin-form">
+                    <h3>Sign In</h3>
+                    <form>
+                        <label for="signin-username-email">Username or Email:</label>
+                        <input type="text" id="signin-username-email" required>
+                        <label for="signin-password">Password:</label>
+                        <input type="password" id="signin-password" required>
+                        <button type="submit">Sign In</button>
+                    </form>
+                    <p style="text-align: right;">Don't have an account? <a href="#" id="signup-link" onclick="showForm('register-form')">Register</a></p>
+                </div>
+
+                <!-- Create Account Form -->
+                <div id="register-form" style="display: none;">
+                    <h3>Create an Account</h3>
+                    <form>
+                        <label for="register-username">Username:</label>
+                        <input type="text" id="register-username" required>
+                        <label for="register-first-name">First Name:</label>
+                        <input type="text" id="register-first-name" required>
+                        <label for="register-last-name">Last Name:</label>
+                        <input type="text" id="register-last-name" required>
+                        <label for="register-email">Email:</label>
+                        <input type="email" id="register-email" required>
+                        <label for="register-password">Password:</label>
+                        <input type="password" id="register-password" required>
+                        <button type="submit">Create Account</button>
+                    </form>
+                    <p style="text-align: right;">Already have an account? <a href="#" id="signin-link" onclick="showForm('signin-form')">Login</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="loginregisterform.js"></script>
+</body>
+</html>

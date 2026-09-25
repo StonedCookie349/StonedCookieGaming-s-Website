@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StonedCookieGaming</title>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <link rel="stylesheet" href="./styles/styles.css">
+    <script src="./handling/loginregisterform.js" defer></script>
+    <script src="./configs/keys.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@400..800&display=swap" rel="stylesheet">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VKC7B3DDWD"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-VKC7B3DDWD');
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="./img/logo.png" alt="Logo" class="logo"> <!-- Adjust the src attribute to your image path -->
+        </div>
+        <div class="text-container">
+            StonedCookieGaming
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="mediacenter.html">Media Center</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="user-info" id="user-info">
+            <div class="welcome-message"></div>
+            <a href="handling/popup.html" id="login-register-link" onclick="showPopup()">Login/Register</a>
+        </div>
+    </header>
+
+    <main>
+        <div class="baloo-chettan">
+            <center>
+                <h1>Welcome to StonedCookieGaming.com!</h1>
+                <h2>Transforming ideas into innovative solutions.</h2>
+            </center>
+        </div>
+        <section>
+            <div class="home1">
+                <p>Hi there! My name is Braxton White A.K.A. StonedCookieGaming.<br><br>My brand offers high quality coding and design services for projects big and small! Ready to get started? Click the button below!</p>
+            </div>
+            <center><button id="getStartedBtn" onclick="showForm('register-form')">Get Started</button></center>
+        </section>
+
+        <h1 class="section-title">Latest News</h1>
+        <section class="cards-section">
+            <div class="card">
+                <img src="./img/minecraft.png" alt="Card Image 1">
+                <div class="card-title">New Project: Empire of Stoners</div>
+                <div class="card-description">I am pleased to announce the release of a new project on the ever popular game known as Minecraft! <br><br> Come join us for the ultimate adventure! Featuring epic modes such as minigames, pvp survival, housing, and more coming soon!</div>
+            </div>
+
+            <div class="card">
+                <img src="./img/fivem.png" alt="Card Image 2">
+                <div class="card-title">Stoner's Paradise in Final Testing Phase</div>
+                <div class="card-description">The FiveM project I have been working on is now within the final testing phase! We are predicting an early summer release. Come join us on FiveM and choose your ideal lifestyle.<br><br>Will you be the hero sworn to protect the community or the gang boss everybody fears?</div>
+            </div>
+
+            <div class="card">
+                <img src="./img/seniors.png" alt="Card Image 3">
+                <div class="card-title">Teaching Generations Young and Old</div>
+                <div class="card-description">Are you a young kiddo that just received their first ever cellphone or a senior citizen that was given an Alexa for Christmas and have no idea how to use them?<br><br>Come join me every Tuesday at 5:00pm Central via Zoom and we will spend the next two hours learning every aspect and function of your device!<br><br>Sign-up forms will be available on the website starting 03/15/2024.</div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Popup and Overlay -->
+    <div id="popup-overlay" onclick="closePopup()"></div>
+    <div id="popup-container"></div>
+
+    <script type="module">
+        import config from './configs/keys.js';
+
+        document.addEventListener("DOMContentLoaded", async function () {
+            const popupContainer = document.getElementById('popup-container');
+            const response = await fetch('./handling/popup.html');
+            const popupHTML = await response.text();
+            popupContainer.innerHTML = popupHTML;
+
+            const recaptchaContainer = document.getElementById('recaptcha-container');
+            if (recaptchaContainer) {
+                recaptchaContainer.innerHTML = `<div class="g-recaptcha" data-sitekey="${config.recaptchaSiteKey}"></div>`;
+            }
+
+            const recaptchaContainerRegister = document.getElementById('recaptcha-container-register');
+            if (recaptchaContainerRegister) {
+                recaptchaContainerRegister.innerHTML = `<div class="g-recaptcha" data-sitekey="${config.recaptchaSiteKey}"></div>`;
+            }
+        });
+
+        function showPopup() {
+            document.getElementById("popup-overlay").style.display = "block";
+            document.getElementById("popup-container").style.display = "block";
+        }
+
+        function closePopup() {
+            document.getElementById("popup-overlay").style.display = "none";
+            document.getElementById("popup-container").style.display = "none";
+        }
+
+        function showForm(formId) {
+            document.getElementById("signin-form").style.display = "none";
+            document.getElementById("register-form").style.display = "none";
+            document.getElementById(formId).style.display = "block";
+        }
+
+        function signIn() {
+            // Handle sign-in logic here
+        }
+
+        function registerUser() {
+            // Handle user registration logic here
+        }
+    </script>
+</body>
+</html>
